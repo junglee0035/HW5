@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Jung Lee / 001
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -32,9 +32,22 @@ class ProblemSolutions {
 
     public boolean isSubset(int list1[], int list2[]) {
 
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
+        // ADD YOUR CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
 
-        return false;
+        // Create HashSet to store elements of list1
+        Set<Integer> set = new HashSet<>();
+        for(int num : list1) {
+            set.add(num);
+        }
+
+        // Check if every element in list2 is present in the HashSet
+        for (int num : list2) {
+            if(!set.contains(num)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
@@ -55,7 +68,20 @@ class ProblemSolutions {
 
         // ADD YOUR CODE HERE
 
-        return 0;
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(k);
+
+        // Add elements to the heap, retaining only the k largest elements
+        for (int num : array) {
+            minHeap.offer(num);
+            if (minHeap.size() > k) {
+
+                // Remove the smallest of the k+1 elements
+                minHeap.poll();
+
+            }
+        }
+
+        return minHeap.peek();
     }
 
 
@@ -74,9 +100,19 @@ class ProblemSolutions {
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
 
-        // ADD YOU CODE HERE
+        // ADD YOUR CODE HERE
 
-        return null;
+        // Create a new array to hold all elements from both input arrays
+        int[] result = new int[array1.length + array2.length];
+
+        // Copy elements from array1 and array2 into the result array
+        System.arraycopy(array1, 0, result, 0, array1.length);
+        System.arraycopy(array2, 0, result, array1.length, array2.length);
+
+        // Sort the combined array
+        Arrays.sort(result);
+
+        return result;
     }
 
 }

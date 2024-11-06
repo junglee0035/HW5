@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Jung Lee / 001
  *
  *   Note, additional comments provided throughout source code is
  *   for educational purposes.
@@ -224,7 +224,22 @@ class BloomFilter {
         // this class on available methods. You can also see how method 'add'
         // in this class uses the object.
 
-        return false;
+        // Iterate through each hash function until noHashes.
+        for( int n = 0; n < noHashes; n++) {
+
+            //Generate nth hash with hashCode method.
+            long hc = hashCode(s, n);
+
+            //Calculate bit position with hashMask to ensure that it is within the range of the BitSet size.
+            int bitNo = (int) (hc & this.hashMask);
+            
+            //Check if the calculated position is set in bitset, otherwise return false.
+            if (!data.get(bitNo)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
